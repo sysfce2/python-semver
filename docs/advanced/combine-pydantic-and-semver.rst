@@ -9,7 +9,22 @@ According to its homepage, `Pydantic <https://pydantic-docs.helpmanual.io>`_
 "enforces type hints at runtime, and provides user friendly errors when data
 is invalid."
 
-To work with Pydantic>2.0, use the following steps:
+If you are working with Pydantic>2.0 and pydantic-extra-types>=2.10.5 use the built in `SemanticVersion` type, which wraps the :class:`Version <semver.version.Version>` class.
+
+    .. code-block:: python
+
+        from pydantic import BaseModel
+        from pydantic_extra_types.semantic_version import SemanticVersion
+
+        class appVersion(BaseModel):
+            version: SemanticVersion
+        
+        app_version = appVersion(version="1.2.3")
+
+        print(app_version.version)
+        # > 1.2.3
+
+To work with Pydantic>2.0 and without pydantic-extra-types use the following example to define your own type:
 
 
 1. Derive a new class from :class:`~semver.version.Version`
